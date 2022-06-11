@@ -1,4 +1,5 @@
 # projetoalura
+<img src="https://miro.medium.com/max/1400/1*ACR0gj0wbx91V_xgURifWg.png">
 
 ## Project setup
 ```
