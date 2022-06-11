@@ -1,5 +1,5 @@
 # projetoalura
-<img src="https://miro.medium.com/max/1400/1*ACR0gj0wbx91V_xgURifWg.png">
+<img src="https://media.discordapp.net/attachments/671839896213782573/985212994025820180/unknown.png?width=1089&height=612">
 
 ## Project setup
 ```
