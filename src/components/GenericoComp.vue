@@ -5,6 +5,9 @@
     <h1 class="centralizado">Cadastro</h1>
     <h2 class="centralizado"></h2>
 
+    <h2 v-if="this.id" class="centralizado">Alterando</h2>
+    <h2 v-else class="centralizado">Incluindo</h2>
+
     <form @submit.prevent="grava()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
@@ -38,12 +41,14 @@
 
 import ButtonComp from './ButtonComp.vue';
 import Foto from '../domain/foto/Foto'
+import EditImage from '../domain/foto/EditImage'
 
 export default {
 
     data(){
         return{
-            foto: new Foto()
+            foto: new Foto(),
+            id: this.$route.params.id
         }
     },
 
@@ -53,11 +58,23 @@ export default {
     ButtonComp
   },
   methods: {
-    grava() {
-       this.$http
-        .post('v1/fotos', this.foto)
-        .then(() => this.foto = new Foto(), err => console.log(err));
+    grava() {      
+       this.service
+        .cadastra(this.foto)
+        .then(() => {
+          if(this.id) this.$router.push({ name: 'home' })
+          this.foto = new Foto()},
+          err => console.log(err));
     }
+  },
+  created() {
+        this.service = new EditImage(this.$resource)
+
+        if(this.id) {
+          this.service
+          .busca(this.id)
+          .then(foto => this.foto = foto)
+        }
   }
 }
 

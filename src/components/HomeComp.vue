@@ -19,7 +19,10 @@
           <div id="fotos" >
             <img id="image" :src="foto.url" v-meu-transform='{animate:true, incremento:10}'/>            
           </div>
-          <meu-botao tipo='button' rotulo='REMOVER' @botaoAtivado="remover(foto)" :confirmacao='false' corDoBotao='padrao'/>
+          <router-link :to="{ name:'altera', params:{id: foto._id} }">
+             <meu-botao tipo='button' rotulo='ALTERAR'  corDoBotao='padrao'/>
+          </router-link>          
+          <meu-botao tipo='button' rotulo='REMOVER' @botaoAtivado="remover(foto)" :confirmacao='false' corDoBotao='perigo'/>
         </div>
       </li>
     </ul>
@@ -82,7 +85,10 @@ export default {
     let promise = this.$http.get('v1/fotos')
    promise
     .then(res => res.json())
-    .then(fotos => this.fotos = fotos)
+    .then(fotos => this.fotos = fotos, err =>{
+      console.log(err)
+      this.mensagem = 'Não foi possível carregar as fotos. Tente mais tarde.'
+    })
 
   }
 };
