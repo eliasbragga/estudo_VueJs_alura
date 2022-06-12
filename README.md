@@ -1,5 +1,3 @@
-# projetoalura
-
 ## Project setup
 ```
 npm install
